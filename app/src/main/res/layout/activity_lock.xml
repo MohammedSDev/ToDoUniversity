@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lock_bg"
+    android:paddingTop="100dp"
+    android:orientation="vertical"
+    >
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        android:textColorHint="#9895f9"
+        android:padding="5dp"
+        android:background="@null"
+        android:gravity="center_horizontal"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#9895f9"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        />
+
+
+    <!--1,2,3-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="1"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="2"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="2"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+    </LinearLayout>
+
+    <!--4,5,6-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="1"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="2"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            androidgggggg:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="2"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+    </LinearLayout>
+
+    <!--7,8,9-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="1"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="2"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="2"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+    </LinearLayout>
+
+
+    <!--7,8,9-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="C"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <TextView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:text="0"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+
+        <ImageView
+            android:layout_width="@dimen/lock_btn_width"
+            android:layout_height="@dimen/lock_btn_height"
+            android:src="@drawable/ic_go"
+            android:scaleType="centerInside"
+            android:gravity="center"
+            android:background="@drawable/oval_btn_lock_screen"
+            android:layout_margin="@dimen/lock_btn_margin"
+            />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>
