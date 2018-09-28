@@ -14,4 +14,13 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+
+    <style name="AppTheme.BlueProgress">
+        <!--<item name="colorAccent">#1e29a1</item>-->
+        <item name="android:progressDrawable">@drawable/progress_drawable</item>
+        <!--<item name="colorControlActivated">#1e9730</item>-->
+        <!--<item name="colorActivatedHighlight">#000</item>-->
+        <!--<item name="colorControlNormal">#fff</item>-->
+    </style>
+
 </resources>

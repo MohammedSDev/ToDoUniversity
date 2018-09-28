@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="text_black">#000</color>
+    <color name="item_text_grey">#8c8989</color>
+    <color name="item_divider">#8c8989</color>
+    <color name="create_task_divider">#cfcccc</color>
+    <color name="createTaskHint">#b9b7b7</color>
 </resources>
