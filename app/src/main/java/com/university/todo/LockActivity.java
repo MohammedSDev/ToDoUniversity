@@ -1,10 +1,12 @@
 package com.university.todo;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LockActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,9 +62,15 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnC: passwordET.setText("");break;
             case R.id.btnEnter:{
                 //check and open app landing screen
-
-                Intent intent = new Intent(this, TaskListActivity.class);
-                startActivity(intent);
+//                SharedPreferences sh = getSharedPreferences("todo_sp",MODE_PRIVATE);
+//                String pass = sh.getString("lock_pass","123");
+//                if (pass.equals(passwordET.getText().toString())) {
+                    Intent intent = new Intent(this, TaskListActivity.class);
+                    startActivity(intent);
+//                }
+//                else{
+//                    Toast.makeText(this, "wrong pass,try again!", Toast.LENGTH_SHORT).show();
+//                }
             }
             break;
             case R.id.btnClose:finish();break;

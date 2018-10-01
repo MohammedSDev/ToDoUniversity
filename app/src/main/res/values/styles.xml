@@ -9,11 +9,20 @@
 
 
 
-        <item name="android:textColor">#fff</item>
+        <item name="android:textColor">#ffffff</item>
 
         <item name="android:textSize">24sp</item>
     </style>
 
+
+    <style name="AppTheme.Switch">
+        <item name="colorControlActivated">#05861f</item>
+    </style>
+
+    <style name="DialogTheme" parent="Base.ThemeOverlay.AppCompat.Dialog">
+        <item name="android:textColor">@color/create_task_main_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <style name="AppTheme.BlueProgress">
         <!--<item name="colorAccent">#1e29a1</item>-->

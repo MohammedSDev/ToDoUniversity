@@ -19,6 +19,7 @@ class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
 
     List<TaskModel> mList = new ArrayList();
     ItemClickCallback mCallback = null;
+    ItemClickLongCallback mLongCallback = null;
 
 
 
@@ -52,6 +53,17 @@ class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                 @Override
                 public void onClick(View view) {
                     mCallback.onItemClick(view, getItem(position), position, "");
+                }
+            });
+        }
+
+        //Long click listener
+        if(mLongCallback != null) {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mLongCallback.onItemLongClick(v, getItem(position), position, "");
+                    return true;
                 }
             });
         }
@@ -90,5 +102,8 @@ class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
      * */
     interface ItemClickCallback<M> {
         void onItemClick(View view, M model, int position,String data);
+    }
+    interface ItemClickLongCallback<M> {
+        void onItemLongClick(View view, M model, int position,String data);
     }
 }

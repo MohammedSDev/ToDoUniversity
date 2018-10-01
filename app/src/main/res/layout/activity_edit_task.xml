@@ -17,7 +17,7 @@
         >
 
         <ImageView
-            android:id="@+id/createTaskBackBtn"
+            android:id="@+id/editTaskBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -59,7 +59,7 @@
 
 
         <Spinner
-            android:id="@+id/createTaskSpinner"
+            android:id="@+id/editTaskSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -73,7 +73,7 @@
             />
 
         <EditText
-            android:id="@+id/createTaskTitle"
+            android:id="@+id/editTaskTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -95,7 +95,7 @@
             />
 
         <EditText
-            android:id="@+id/createTaskDesc"
+            android:id="@+id/editTaskDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -117,7 +117,7 @@
 
 
         <TextView
-            android:id="@+id/createTaskTime"
+            android:id="@+id/editTaskTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -135,13 +135,24 @@
             />
 
 
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/editTaskDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:text="Done: "
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:theme="@style/AppTheme.Switch"
+            />
 
 
         <Button
-            android:id="@+id/createTaskBtn"
+            android:id="@+id/editTaskBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create New Task"
+            android:text="Update New Task"
             android:textSize="13sp"
             android:background="#209470"
             android:layout_marginTop="50dp"

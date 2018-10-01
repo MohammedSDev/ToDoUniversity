@@ -8,4 +8,6 @@
     <color name="item_divider">#8c8989</color>
     <color name="create_task_divider">#cfcccc</color>
     <color name="createTaskHint">#b9b7b7</color>
+    <color name="white">#fff</color>
+    <color name="create_task_main_color">#2d5d8c</color>
 </resources>

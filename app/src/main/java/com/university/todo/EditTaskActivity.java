@@ -1,8 +1,9 @@
 package com.university.todo;
 
 import android.app.TimePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
@@ -11,49 +12,82 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.List;
 
-public class CreateTaskActivity extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
+public class EditTaskActivity extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
 
 
     TextView time;
     EditText title;
     EditText desc;
+    SwitchCompat done;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_task);
+        setContentView(R.layout.activity_edit_task);
 
+
+        if (getIdFromBundle().isEmpty())
+            finish();
 
         config();
 
     }
 
+
+    private String getIdFromBundle(){
+        return getIntent().getIntExtra(TaskListActivity.BUNDLE_ID,0) + "";
+    }
+
+
     private void config() {
-        title = findViewById(R.id.createTaskTitle);
-        desc = findViewById(R.id.createTaskDesc);
-        time = findViewById(R.id.createTaskTime);
-        findViewById(R.id.createTaskBackBtn).setOnClickListener(this);
-        findViewById(R.id.createTaskBtn).setOnClickListener(this);
+        title = findViewById(R.id.editTaskTitle);
+        desc = findViewById(R.id.editTaskDesc);
+        time = findViewById(R.id.editTaskTime);
+        done = findViewById(R.id.editTaskDone);
+        findViewById(R.id.editTaskBackBtn).setOnClickListener(this);
+        findViewById(R.id.editTaskBtn).setOnClickListener(this);
         time.setOnClickListener(this);
-        Spinner spinner = findViewById(R.id.createTaskSpinner);
+        Spinner spinner = findViewById(R.id.editTaskSpinner);
         spinner.setAdapter(new TaskTypeAdapter());
 
 
 
+        //get task
+        TaskModel task = getTask(getIdFromBundle());
+        setData(task);
+
+    }
+
+
+    private void setData(TaskModel model){
+        title.setText(model.getTitle());
+        desc.setText(model.getDescription());
+        time.setText(model.getTime());
+
+        done.setChecked(model.isDone());
+    }
+
+
+
+    private TaskModel getTask(String id) {
+        return Db.getInstance(this)
+                .tasksDao()
+                .loadTask(id);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.createTaskBackBtn:
+            case R.id.editTaskBackBtn:
                 onBackPressed();
                 break;
-            case R.id.createTaskTime:
+            case R.id.editTaskTime:
                 showTimerPicker();
                 break;
-            case R.id.createTaskBtn:
+            case R.id.editTaskBtn:
                 createNewTaskInDb();
                 break;
                 default:

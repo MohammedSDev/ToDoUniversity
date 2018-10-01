@@ -3,6 +3,7 @@ package com.university.todo;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -18,4 +19,10 @@ public interface TaskDao {
 
     @Query("SELECT * FROM tasks")
     List<TaskModel> loadAllTasksForToday();
+
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    TaskModel loadTask(String id);
+
+    @Update
+    void update(TaskModel task);
 }
