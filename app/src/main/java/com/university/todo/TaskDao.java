@@ -15,7 +15,7 @@ import java.util.List;
 public interface TaskDao {
 
     @Insert
-    void insert(TaskModel task);
+    Long insert(TaskModel task);
 
     @Query("SELECT * FROM tasks")
     List<TaskModel> loadAllTasksForToday();

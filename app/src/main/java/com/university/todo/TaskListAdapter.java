@@ -47,6 +47,15 @@ class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
         holder.time.setText(model.getTime());
 
 
+        if (model.isDone()){
+            holder.img.setImageResource(R.drawable.done);
+        }else
+            switch (model.getPriority()){
+                case 0:
+                    holder.img.setImageResource(R.drawable.ic_important);break;
+                case 1:
+                    holder.img.setImageResource(R.drawable.ic_medium);break;
+            }
         //click listener
         if(mCallback != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

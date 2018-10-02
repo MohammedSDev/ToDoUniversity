@@ -8,7 +8,7 @@ import android.content.Context;
 /**
  * Created by Gg on 9/28/2018.
  */
-@Database(entities = {TaskModel.class}, version = 2)
+@Database(entities = {TaskModel.class}, version = 5)
 public abstract class Db extends RoomDatabase {
     public abstract TaskDao tasksDao();
 
@@ -18,7 +18,7 @@ public abstract class Db extends RoomDatabase {
          synchronized (Db.class) {
              if (db == null)
                  db = Room.databaseBuilder(context.getApplicationContext(),
-                         Db.class, "TaskUniversityDb")
+                         Db.class, "TaskUniversityDb2")
                          .allowMainThreadQueries()
                          .fallbackToDestructiveMigration()
                          .build();

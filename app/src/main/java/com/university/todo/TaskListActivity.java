@@ -29,7 +29,9 @@ public class TaskListActivity extends AppCompatActivity
     SwipeRefreshLayout refresh;
 
     public static final String BUNDLE_ID = "bun_id";
+    public static final String BUNDLE_INDEX = "bun_indx";
     private final int CREATE_TASK_CODE = 8;
+    private final int EDIT_TASK_CODE = 9;
 
 
     @Override
@@ -79,6 +81,10 @@ public class TaskListActivity extends AppCompatActivity
 
         //don't forgot to use Empty view
 
+        showHideEmptyView();
+    }
+
+    private void showHideEmptyView() {
         if (adapter.mList.isEmpty()){
             emptyView.setText("No tasks available");
         }else{
@@ -90,7 +96,9 @@ public class TaskListActivity extends AppCompatActivity
         //update adapter with your list
         adapter.mList = getTasks("");
         adapter.notifyDataSetChanged();
+        showHideEmptyView();
         refresh.setRefreshing(false);
+
     }
 
     private List<TaskModel> getTasks(String date) {
@@ -99,26 +107,12 @@ public class TaskListActivity extends AppCompatActivity
                 .loadAllTasksForToday();
     }
 
-
-    /**
-     * handle on any item of list clicked
-     * */
-    @Override
-    public void onItemClick(View view, final TaskModel model, int position, String data) {
-       if (model.isDone()) return;
-       //convert to done
-        new AlertDialog.Builder(this,R.style.DialogTheme)
-                .setMessage("convert to done task?")
-                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        model.setDone(true);
-                        updateTask(model);
-                    }
-                })
-                .setNegativeButton("cancel",null)
-                .show();
+    private TaskModel getTask(String id) {
+        return Db.getInstance(this)
+                .tasksDao()
+                .loadTask(id);
     }
+
 
     private void updateTask(TaskModel model) {
         Db.getInstance(TaskListActivity.this)
@@ -138,6 +132,27 @@ public class TaskListActivity extends AppCompatActivity
         }, 1000);
     }
 
+    public void onRefreshOneRow(final String id, final int index) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //update adapter with your list
+                TaskModel model = getTask(id);
+                if (index != 0) {
+                    adapter.mList.get(index).update(model);
+                    adapter.notifyItemChanged(index);
+                }else{
+                    boolean added = adapter.mList.add(model);
+                    if (added) {
+                        adapter.notifyItemInserted((adapter.mList.size() - 1));
+                        showHideEmptyView();
+                    }
+                }
+                refresh.setRefreshing(false);
+            }
+        }, 1000);
+    }
+
 
     private void startRefresh(){
         if (refresh != null && !refresh.isRefreshing())
@@ -151,8 +166,13 @@ public class TaskListActivity extends AppCompatActivity
         if (resultCode == RESULT_OK){
             switch (requestCode){
                 case CREATE_TASK_CODE:
+                    if (data == null)return;
+                    onRefreshOneRow(data.getIntExtra(BUNDLE_ID,0) + "",0);
                     startRefresh();
-                    callTaskesFromDb();
+                case EDIT_TASK_CODE:
+                    if (data == null)return;
+                    onRefreshOneRow(data.getIntExtra(BUNDLE_ID,0) + "",data.getIntExtra(BUNDLE_INDEX,0));
+                    startRefresh();
                     break;
                     default:
                         //nothing
@@ -160,10 +180,31 @@ public class TaskListActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * handle on any item of list clicked
+     * */
+    @Override
+    public void onItemClick(View view, final TaskModel model, int position, String data) {
+        if (model.isDone()) return;
+        //convert to done
+        new AlertDialog.Builder(this,R.style.DialogTheme)
+                .setMessage("convert to done task?")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        model.setDone(true);
+                        updateTask(model);
+                    }
+                })
+                .setNegativeButton("cancel",null)
+                .show();
+    }
+
     @Override
     public void onItemLongClick(View view, TaskModel model, int position, String data) {
         Intent intent = new Intent(this,EditTaskActivity.class);
         intent.putExtra(BUNDLE_ID,model.getId());
-        startActivity(intent);
+        intent.putExtra(BUNDLE_INDEX,position);
+        startActivityForResult(intent,EDIT_TASK_CODE);
     }
 }

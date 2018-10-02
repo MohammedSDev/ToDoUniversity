@@ -23,9 +23,20 @@ class TaskModel {
     @ColumnInfo(name = "date_")
     private String date;
     private boolean done;
+    private int priority;
 
 
 
+
+    public void update(TaskModel newModel){
+        imgUrl = newModel.imgUrl;
+        title = newModel.title;
+        description = newModel.description;
+        time = newModel.time;
+        date = newModel.date;
+        done = newModel.done;
+        priority = newModel.priority;
+    }
 
 
     //Getters & Setters
@@ -41,6 +52,14 @@ class TaskModel {
 
     public boolean isDone() {
         return done;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public void setDone(boolean done) {

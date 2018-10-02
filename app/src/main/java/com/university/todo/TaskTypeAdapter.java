@@ -6,6 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Gg on 9/28/2018.
@@ -14,14 +18,24 @@ import android.widget.BaseAdapter;
 public class TaskTypeAdapter extends BaseAdapter {
 
 
+    List<String> stringList = new ArrayList<>();
     private String TAG = "adapter";
 
 
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        Log.d(TAG, "getDropDownView: ");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_type_item,parent,false);
+    public TaskTypeAdapter() {
+        stringList.add("Important");
+        stringList.add("medium");
 
+    }
+
+    @Override
+    public View getDropDownView(int position, View view, ViewGroup parent) {
+        Log.d(TAG, "getDropDownView: ");
+        if (view == null)
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_type_item_drop,parent,false);
+
+        TextView tv = view.findViewById(R.id.item);
+        tv.setText(stringList.get(position));
         return view;
 //                super.getDropDownView(position, convertView, parent);
     }
@@ -33,18 +47,21 @@ public class TaskTypeAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return stringList.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Log.d(TAG, "getView: ");
-        view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.task_type_item_drop,viewGroup,false);
+        if (view == null)
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.task_type_item,viewGroup,false);
+        TextView tv = view.findViewById(R.id.item);
+        tv.setText(stringList.get(i));
         return view;
     }
 }

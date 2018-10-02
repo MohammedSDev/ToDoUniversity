@@ -6,13 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class EditTaskActivity extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
 
@@ -21,6 +22,8 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     EditText title;
     EditText desc;
     SwitchCompat done;
+    Spinner spinner;
+    ImageView img;
 
 
     @Override
@@ -37,8 +40,8 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private String getIdFromBundle(){
-        return getIntent().getIntExtra(TaskListActivity.BUNDLE_ID,0) + "";
+    private String getIdFromBundle() {
+        return getIntent().getIntExtra(TaskListActivity.BUNDLE_ID, 0) + "";
     }
 
 
@@ -47,13 +50,30 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         desc = findViewById(R.id.editTaskDesc);
         time = findViewById(R.id.editTaskTime);
         done = findViewById(R.id.editTaskDone);
+        img = findViewById(R.id.editTaskImg);
         findViewById(R.id.editTaskBackBtn).setOnClickListener(this);
         findViewById(R.id.editTaskBtn).setOnClickListener(this);
         time.setOnClickListener(this);
-        Spinner spinner = findViewById(R.id.editTaskSpinner);
+        spinner = findViewById(R.id.editTaskSpinner);
         spinner.setAdapter(new TaskTypeAdapter());
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        img.setImageResource(R.drawable.ic_important);
+                        break;
+                    case 1:
+                        img.setImageResource(R.drawable.ic_medium);
+                        break;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
 
         //get task
         TaskModel task = getTask(getIdFromBundle());
@@ -62,14 +82,15 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void setData(TaskModel model){
+    private void setData(TaskModel model) {
         title.setText(model.getTitle());
         desc.setText(model.getDescription());
         time.setText(model.getTime());
-
+        spinner.setSelection(model.getPriority());
         done.setChecked(model.isDone());
+        if (model.isDone())
+            img.setImageResource(R.drawable.done);
     }
-
 
 
     private TaskModel getTask(String id) {
@@ -80,7 +101,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.editTaskBackBtn:
                 onBackPressed();
                 break;
@@ -88,23 +109,25 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
                 showTimerPicker();
                 break;
             case R.id.editTaskBtn:
-                createNewTaskInDb();
+                updateNewTaskInDb();
                 break;
-                default:
-                    //
+            default:
+                //
 
         }
     }
 
-    private void createNewTaskInDb() {
-        TaskModel model = new TaskModel();
+    private void updateNewTaskInDb() {
+        TaskModel model = getTask(getIdFromBundle());
         model.setDescription(desc.getText().toString());
         model.setTitle(title.getText().toString());
         model.setTime(time.getText().toString());
+        model.setDone(done.isChecked());
+        model.setPriority((int) spinner.getSelectedItemId());
 
-        Db.getInstance(this).tasksDao().insert(model);
+        Db.getInstance(this).tasksDao().update(model);
 
-        setResult(RESULT_OK);
+        setResult(RESULT_OK, getIntent());
         finish();
     }
 
@@ -114,8 +137,8 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         int minute = c.get(Calendar.MINUTE);
 
         // Create a new instance of TimePickerDialog and return it
-        new TimePickerDialog(this, this, hour, minute,DateFormat.is24HourFormat(this))
-        .show();
+        new TimePickerDialog(this, this, hour, minute, DateFormat.is24HourFormat(this))
+                .show();
     }
 
     @Override

@@ -67,6 +67,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
 //                if (pass.equals(passwordET.getText().toString())) {
                     Intent intent = new Intent(this, TaskListActivity.class);
                     startActivity(intent);
+                    finish();
 //                }
 //                else{
 //                    Toast.makeText(this, "wrong pass,try again!", Toast.LENGTH_SHORT).show();
