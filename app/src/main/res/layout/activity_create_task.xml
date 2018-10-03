@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/create_task_main_color"
     android:orientation="vertical"
-    tools:context="com.university.todo.CreateTaskActivity">
+    tools:context="com.university.todo.CreateTaskActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <FrameLayout
@@ -47,10 +49,10 @@
 
             <ImageView
                 android:id="@+id/createTaskImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/task_img_width_height"
+                android:layout_height="@dimen/task_img_width_height"
                 android:background="@drawable/task_item_img_border"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:padding="10dp"
                 tools:src="@drawable/ic_medium"
                 android:layout_gravity="center_horizontal"

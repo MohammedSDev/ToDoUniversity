@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -27,6 +29,10 @@ public class TaskListActivity extends AppCompatActivity
     RecyclerView recycle;
     TextView emptyView;
     SwipeRefreshLayout refresh;
+    TextView allValue;
+    TextView doneValue;
+    TextView donePercent;
+    ProgressBar progress;
 
     public static final String BUNDLE_ID = "bun_id";
     public static final String BUNDLE_INDEX = "bun_indx";
@@ -43,6 +49,10 @@ public class TaskListActivity extends AppCompatActivity
         recycle = findViewById(R.id.recycle);
         emptyView = findViewById(R.id.emptyView);
         refresh = findViewById(R.id.refresh);
+        allValue = findViewById(R.id.allValue);
+        doneValue = findViewById(R.id.doneValue);
+        donePercent = findViewById(R.id.donePercent);
+        progress = findViewById(R.id.progress);
 
 
         config();
@@ -138,7 +148,7 @@ public class TaskListActivity extends AppCompatActivity
             public void run() {
                 //update adapter with your list
                 TaskModel model = getTask(id);
-                if (index != 0) {
+                if (index != -1) {
                     adapter.mList.get(index).update(model);
                     adapter.notifyItemChanged(index);
                 }else{
@@ -167,11 +177,12 @@ public class TaskListActivity extends AppCompatActivity
             switch (requestCode){
                 case CREATE_TASK_CODE:
                     if (data == null)return;
-                    onRefreshOneRow(data.getIntExtra(BUNDLE_ID,0) + "",0);
+                    onRefreshOneRow(data.getIntExtra(BUNDLE_ID,0) + "",-1);
                     startRefresh();
+                    break;
                 case EDIT_TASK_CODE:
                     if (data == null)return;
-                    onRefreshOneRow(data.getIntExtra(BUNDLE_ID,0) + "",data.getIntExtra(BUNDLE_INDEX,0));
+                    onRefreshOneRow(data.getIntExtra(BUNDLE_ID,0) + "",data.getIntExtra(BUNDLE_INDEX,-1));
                     startRefresh();
                     break;
                     default:
@@ -188,12 +199,13 @@ public class TaskListActivity extends AppCompatActivity
         if (model.isDone()) return;
         //convert to done
         new AlertDialog.Builder(this,R.style.DialogTheme)
-                .setMessage("convert to done task?")
+                .setMessage("convert to done?")
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         model.setDone(true);
                         updateTask(model);
+                        onStart();
                     }
                 })
                 .setNegativeButton("cancel",null)
@@ -207,4 +219,43 @@ public class TaskListActivity extends AppCompatActivity
         intent.putExtra(BUNDLE_INDEX,position);
         startActivityForResult(intent,EDIT_TASK_CODE);
     }
+
+
+
+
+    //region lifeCycle
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        int all = Db.getInstance(this)
+                .tasksDao()
+                .tasksCount();
+        allValue.setText( ("" + all));
+
+        int done = Db.getInstance(this)
+                .tasksDao()
+                .doneTasksCount();
+        doneValue.setText( ("" + done) );
+
+        int percent = done / all;
+        progress.setMax(all);
+        progress.setProgress(done);
+        String s = percent + "% done";
+        donePercent.setText(s);
+
+
+        //today date
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("lifeCycle", "onResume: ");
+    }
+
+
+    //endregion
 }

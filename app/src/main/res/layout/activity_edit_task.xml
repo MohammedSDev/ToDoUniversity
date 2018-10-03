@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     android:background="@color/create_task_main_color"
     android:orientation="vertical"
-    tools:context="com.university.todo.CreateTaskActivity">
+    tools:context="com.university.todo.CreateTaskActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
 
 
     <FrameLayout
@@ -40,133 +43,124 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/editTaskImg"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/task_item_img_border"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-
-        />
-    
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
+            <ImageView
+                android:id="@+id/editTaskImg"
+                android:layout_width="@dimen/task_img_width_height"
+                android:layout_height="@dimen/task_img_width_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"
+                android:background="@drawable/task_item_img_border"
+                android:scaleType="centerInside"
+                />
 
 
-
-        <Spinner
-            android:id="@+id/editTaskSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/create_task_divider"
-            />
-
-        <EditText
-            android:id="@+id/editTaskTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="Title"
-            android:inputType="text"
-
-            android:textColor="@color/white"
-            android:maxLines="1"
-            android:padding="10dp"
-            android:textColorHint="@color/createTaskHint"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/create_task_divider"
-            />
-
-        <EditText
-            android:id="@+id/editTaskDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="Description"
-            android:inputType="textMultiLine"
-            android:maxLines="2"
-            android:textColor="@color/white"
-            android:lines="2"
-            android:padding="10dp"
-            android:textColorHint="@color/createTaskHint"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/create_task_divider"
-            />
+                <Spinner
+                    android:id="@+id/editTaskSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null" />
 
 
-        <TextView
-            android:id="@+id/editTaskTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="Time"
-            android:padding="10dp"
-            android:textColorHint="@color/createTaskHint"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/create_task_divider" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/create_task_divider"
-            />
+                <EditText
+                    android:id="@+id/editTaskTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:hint="Title"
+
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/createTaskHint"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/create_task_divider" />
+
+                <EditText
+                    android:id="@+id/editTaskDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:hint="Description"
+                    android:inputType="textMultiLine"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/createTaskHint"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/create_task_divider" />
 
 
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/editTaskDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="10dp"
-            android:text="Done: "
-            android:textSize="12sp"
-            android:textColor="#fff"
-            android:theme="@style/AppTheme.Switch"
-            />
+                <TextView
+                    android:id="@+id/editTaskTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:hint="Time"
+                    android:padding="10dp"
+                    android:textColorHint="@color/createTaskHint"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/create_task_divider" />
 
 
-        <Button
-            android:id="@+id/editTaskBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update New Task"
-            android:textSize="13sp"
-            android:background="#209470"
-            android:layout_marginTop="50dp"
-            />
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/editTaskDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:text="Done: "
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:theme="@style/AppTheme.Switch" />
 
-    </LinearLayout>
+
+                <Button
+                    android:id="@+id/editTaskBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:background="#209470"
+                    android:text="Update New Task"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -3,4 +3,5 @@
     <dimen name="lock_btn_width">90dp</dimen>
     <dimen name="lock_btn_height">90dp</dimen>
     <dimen name="lock_btn_margin">2dp</dimen>
+    <dimen name="task_img_width_height">60dp</dimen>
 </resources>

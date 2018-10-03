@@ -25,4 +25,10 @@ public interface TaskDao {
 
     @Update
     void update(TaskModel task);
+
+    @Query("SELECT COUNT(*) FROM tasks")
+    int tasksCount();
+
+    @Query("SELECT COUNT(*) FROM tasks WHERE done = 1")
+    int doneTasksCount();
 }
