@@ -238,10 +238,11 @@ public class TaskListActivity extends AppCompatActivity
                 .doneTasksCount();
         doneValue.setText( ("" + done) );
 
-        int percent = done / all;
+        Float percent = Float.parseFloat( ("" + done) ) / all;
         progress.setMax(all);
         progress.setProgress(done);
-        String s = percent + "% done";
+        percent*= 100;
+        String s = percent.intValue() + "% done";
         donePercent.setText(s);
 
 

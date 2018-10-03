@@ -18,13 +18,15 @@ import java.util.List;
 public class TaskTypeAdapter extends BaseAdapter {
 
 
+    public static final int IMPORTANT_CODE = 0;
+    public static final int MEDIUM_CODE = 1;
     List<String> stringList = new ArrayList<>();
     private String TAG = "adapter";
 
 
     public TaskTypeAdapter() {
-        stringList.add("Important");
-        stringList.add("medium");
+        stringList.add("Important"); //0
+        stringList.add("medium"); //1
 
     }
 

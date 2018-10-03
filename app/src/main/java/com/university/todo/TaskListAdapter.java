@@ -51,9 +51,9 @@ class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
             holder.img.setImageResource(R.drawable.done);
         }else
             switch (model.getPriority()){
-                case 0:
+                case TaskTypeAdapter.IMPORTANT_CODE:
                     holder.img.setImageResource(R.drawable.ic_important);break;
-                case 1:
+                case TaskTypeAdapter.MEDIUM_CODE:
                     holder.img.setImageResource(R.drawable.ic_medium);break;
             }
         //click listener

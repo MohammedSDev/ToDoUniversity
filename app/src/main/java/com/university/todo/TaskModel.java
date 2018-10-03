@@ -6,11 +6,13 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by Gg on 9/24/2018.
  */
 @Entity(tableName = "tasks")
-class TaskModel {
+class TaskModel implements Serializable {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)

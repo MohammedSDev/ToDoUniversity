@@ -1,6 +1,9 @@
 package com.university.todo;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -50,9 +53,9 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
-                    case 0:
+                    case TaskTypeAdapter.IMPORTANT_CODE:
                         img.setImageResource(R.drawable.ic_important);break;
-                    case 1:
+                    case TaskTypeAdapter.MEDIUM_CODE:
                         img.setImageResource(R.drawable.ic_medium);break;
                 }
             }
@@ -94,6 +97,10 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
 
         getIntent().putExtra(TaskListActivity.BUNDLE_ID,insert.intValue());
         Log.d("insert", "createNewTaskInDb: id=" + insert);
+
+        setAlarm(model);
+
+
         setResult(RESULT_OK,getIntent());
         finish();
     }
@@ -111,5 +118,37 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
         time.setText(hourOfDay + ":" + minutes);
+    }
+
+
+    private void setAlarm(TaskModel model){
+
+        AlarmManager alarmM = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        String[] time = model.getTime().split(":");
+        Log.d("alarm", "setAlarm: " + time);
+        if (time.length >= 1)
+            calendar.set(Calendar.HOUR_OF_DAY,Integer.valueOf(time[0]));
+        if (time.length >= 2)
+            calendar.set(Calendar.MINUTE,Integer.valueOf(time[1]));
+
+        //create intent
+        Intent intent = new Intent(this, MyReceiver.class);
+        intent.putExtra(MyReceiver.BUNDLE_TASK_MODEL,model);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,
+                intent
+                ,0);
+
+        if (model.getPriority() == TaskTypeAdapter.MEDIUM_CODE)
+            alarmM.set(AlarmManager.RTC,
+                    calendar.getTimeInMillis(),
+                    pendingIntent);
+        else
+            alarmM.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),
+                    10 * 60 * 1000,
+                    pendingIntent);
     }
 }

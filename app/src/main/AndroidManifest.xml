@@ -18,8 +18,13 @@
         </activity>
         <activity android:name=".LockActivity" />
         <activity android:name=".TaskListActivity" />
-        <activity android:name=".CreateTaskActivity"/>
-        <activity android:name=".EditTaskActivity"/>
+        <activity android:name=".CreateTaskActivity" />
+        <activity android:name=".EditTaskActivity" />
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

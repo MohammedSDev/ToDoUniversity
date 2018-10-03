@@ -60,10 +60,10 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0:
+                    case TaskTypeAdapter.IMPORTANT_CODE:
                         img.setImageResource(R.drawable.ic_important);
                         break;
-                    case 1:
+                    case TaskTypeAdapter.MEDIUM_CODE:
                         img.setImageResource(R.drawable.ic_medium);
                         break;
                 }
