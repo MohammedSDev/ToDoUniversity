@@ -42,7 +42,7 @@ public class MyReceiver extends BroadcastReceiver {
 
 //            NotificationManager notiManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationManagerCompat.from(context)
-                    .notify(13,notification);
+                    .notify(model.getId(),notification);
 
 
             Log.d("bc", "onReceive: done");
